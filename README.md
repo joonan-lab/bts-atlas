@@ -10,6 +10,8 @@ Analysis code for the Brain Transcriptome Single-cell (BTS) atlas, an integrated
 
 The processed atlas is on Zenodo under a CC BY 4.0 license: https://doi.org/10.5281/zenodo.10939706 (all versions).
 
+The Zenodo files are release `BTS-v1`. Later lab releases with corrected gene names, and a known gene-name issue of `BTS-v1`, are listed in [docs/releases.md](docs/releases.md).
+
 | File | Content |
 |---|---|
 | `BTS_atlas.h5ad` | AnnData object of the integrated atlas |
