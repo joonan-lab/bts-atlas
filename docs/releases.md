@@ -6,7 +6,6 @@ This file lists the releases of the BTS atlas that lab projects use. Each releas
 |---|---|---|---|---|---|
 | `BTS-v1` | `BTS_atlas.h5ad` | 393,060 cells, 49,133 features | Original symbols in `var/new_gene` (HGNC 2023-03-28, NCBI `gene_info`) | MD5 `a79cacfcbe34f99dadf59a1b693178e8` (Zenodo) | Published. Zenodo [10939706](https://doi.org/10.5281/zenodo.10939706): v1.0.0 (2024-06-17), v1.0.1 (2024-11-18, adds `BTS_atlas_seurat.rds`). The h5ad file is the same in both versions |
 | `BTS-v2` | `BTS_atlas.modern_gencode_hgnc.scvi_hvg5000.h5ad` | 393,060 cells, 58,219 features | Rebuilt from the source datasets with GENCODE v49 and HGNC approved symbols; `var` has `gene_symbol`, `stable_gene_id`, `hgnc_id` | SHA-256 `bd9dfe98d1824a59f55dfab338e22459917c772aab5ef4743a01d746318f87e1` | Lab release (2026-06-14), not on Zenodo |
-| `BTS-v2-compat` | `BTS_atlas.v2.scvi_hvg5000.h5ad` | 393,060 cells, 49,133 features | `BTS-v1` features with 371 names corrected in `var/new_gene` | SHA-256 `7f0ebb804af0544f41d245b763163504b2632d071055db205a8848afb0a51551` | Lab release (2026-06-14), not on Zenodo |
 
 ## BTS-v1
 
@@ -24,17 +23,6 @@ Same cells and the same cell annotations (`obs`) as `BTS-v1`.
 - A new scVI integration was added: 5,000 highly variable genes (`cell_ranger` flavour, batch key `Dataset`), scVI on `counts` with batch key `Dataset` and categorical covariate `Assay`, 10 latent dimensions, 20 epochs, seed 0 (scanpy 1.10.4, anndata 0.12.16, scvi-tools 1.2.2). Results are in `obsm/X_scVI_hvg5000_corrected`, `obsm/X_umap_hvg5000_corrected` and `obs/leiden_0.5_scvi_hvg5000` (43 clusters). The `BTS-v1` embedding is kept in `obsm/X_scVI_sampleID` and `obsm/X_umap`.
 
 Used by (2026-11-15): `human-brain-geometry-dev` (BTSdiff), `asd-oligogenic-geometry-dev`.
-
-## BTS-v2-compat
-
-Use this release when an analysis must keep the `BTS-v1` feature set and matrix (log counts) but needs the corrected names.
-
-- Only `var/new_gene` changed. A name was corrected when the expression of the `BTS-v1` feature matched the rebuilt gene with correlation >= 0.8 (high confidence) or >= 0.6 (medium confidence), and with a margin >= 0.2 over the next candidate when two candidates were comparable.
-- 371 features were renamed. 86 candidates with low or ambiguous evidence kept their `BTS-v1` name.
-- The differential-expression results computed with the old names (`uns/wilcoxon`, `uns/ttest_pts`) were removed.
-- It has the same scVI embedding and Leiden clusters as `BTS-v2`.
-
-Used by (2026-11-15): no lab repository found.
 
 ## Other atlases
 
